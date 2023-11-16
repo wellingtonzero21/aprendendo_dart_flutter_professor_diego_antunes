@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_professor_diego/pages/home_controller.dart';
 
-class HomePage extends StatelessWidget {
+import '../models/times.dart';
 
+class HomePage extends StatefulWidget {
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  var controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = HomeController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,17 +27,18 @@ class HomePage extends StatelessWidget {
         ),
       ),
       body: ListView.separated(
-          itemBuilder: (context, index) {
-            final tabela = controller.tabela;
-            return ListTile(
-              leading: Image.network(""),
-              title: Text("Nome do time"),
-              trailing: Text("N. de Pontos"),
-            );
-          },
-          separatorBuilder: (context, index) => Divider(),
-          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-          itemCount: controller.tabela.lengh),
+        itemCount: controller.tabela.length,
+        itemBuilder: (context, i) {
+          final List<Time> tabela = controller.tabela;
+          return ListTile(
+            leading: Image.network(tabela[i].brasao),
+            title: Text(tabela[i].nome),
+            trailing: Text(tabela[i].pontos.toString()),
+          );
+        },
+        separatorBuilder: (context, index) => Divider(),
+        padding: EdgeInsets.all(16),
+      ),
     );
   }
 }
