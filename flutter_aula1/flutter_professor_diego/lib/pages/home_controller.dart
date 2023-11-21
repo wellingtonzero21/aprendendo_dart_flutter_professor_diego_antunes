@@ -1,6 +1,5 @@
 import '../repositories/times_repository.dart';
 import '../models/times.dart';
-import '../models/titulo.dart';
 
 class HomeController {
   late TimesRepository timesRepository;

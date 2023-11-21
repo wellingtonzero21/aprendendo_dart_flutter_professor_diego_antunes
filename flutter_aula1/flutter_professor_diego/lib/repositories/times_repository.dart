@@ -16,7 +16,7 @@ class TimesRepository {
       _times.addAll([
       Time(
         nome: 'Flamengo',
-        pontos: 0,
+        pontos: 5,
         brasao: 'https://logodetimes.com/times/flamengo/logo-flamengo-256.png',
         cor: Colors.red[900]!,
       ),

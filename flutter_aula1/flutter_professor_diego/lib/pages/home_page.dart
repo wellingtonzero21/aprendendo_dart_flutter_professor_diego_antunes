@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_professor_diego/pages/home_controller.dart';
+import 'package:flutter_professor_diego/pages/time_pages/time.dart';
 
 import '../models/times.dart';
 
@@ -34,6 +35,9 @@ class _HomePageState extends State<HomePage> {
             leading: Image.network(tabela[i].brasao),
             title: Text(tabela[i].nome),
             trailing: Text(tabela[i].pontos.toString()),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => TimePage(key: Key(tabela[i].nome), time: tabela[i],),));
+            },
           );
         },
         separatorBuilder: (context, index) => Divider(),
