@@ -1,19 +1,27 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import '../models/times.dart';
 import '../models/titulo.dart';
 
-
-class TimesRepository {
+class TimesRepository extends ChangeNotifier {
   final List<Time> _times = [];
 
-  get times => _times;
+  UnmodifiableListView<Time> get times => UnmodifiableListView(_times);
 
   void addTitulo({Time? time, Titulo? titulo}) {
     time?.titulo.add(titulo!);
+    notifyListeners();
   }
-  
-    TimesRepository() {
-      _times.addAll([
+
+  void editTitulo({required Titulo titulo, required String ano, required String campeonato}) {
+      titulo.campeonato = campeonato;
+      titulo.ano = ano;
+      notifyListeners();
+  }
+
+  TimesRepository() {
+    _times.addAll([
       Time(
         nome: 'Flamengo',
         pontos: 5,
@@ -73,7 +81,7 @@ class TimesRepository {
         brasao:
             'https://logodetimes.com/times/atletico-paranaense/logo-atletico-paranaense-256.png',
         cor: Colors.red[900]!,
-       ),
+      ),
       Time(
         nome: 'Corinthians',
         pontos: 0,
@@ -93,7 +101,7 @@ class TimesRepository {
         pontos: 0,
         brasao: 'https://logodetimes.com/times/ceara/logo-ceara-256.png',
         cor: Colors.grey[800]!,
-       ),
+      ),
       Time(
         nome: 'Atlético-GO',
         pontos: 0,
@@ -120,7 +128,7 @@ class TimesRepository {
         brasao:
             'https://logodetimes.com/times/fortaleza/logo-fortaleza-256.png',
         cor: Colors.red[900]!,
-       ),
+      ),
       Time(
         nome: 'Vasco',
         pontos: 0,
@@ -140,6 +148,6 @@ class TimesRepository {
         brasao: 'https://logodetimes.com/times/botafogo/logo-botafogo-256.png',
         cor: Colors.grey[800]!,
       ),
-      ]);
-    }
+    ]);
+  }
 }
