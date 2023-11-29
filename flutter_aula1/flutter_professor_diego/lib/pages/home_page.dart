@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_professor_diego/pages/home_controller.dart';
 import 'package:flutter_professor_diego/pages/time_page.dart';
 import 'package:flutter_professor_diego/repositories/times_repository.dart';
+import 'package:flutter_professor_diego/widgets/brasao.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -36,7 +37,7 @@ class _HomePageState extends State<HomePage> {
             itemBuilder: (context, i) {
               final List<Time> tabela = repositorio.times;
               return ListTile(
-                leading: Image.network(tabela[i].brasao),
+                leading: Brasao(image: tabela[i].brasao, width: 40),
                 title: Text(tabela[i].nome),
                 subtitle: Text('Títulos: ${tabela[i].titulo.length}'),
                 trailing: Text(tabela[i].pontos.toString()),
