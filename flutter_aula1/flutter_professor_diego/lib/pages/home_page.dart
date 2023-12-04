@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_professor_diego/controllers/theme_controller.dart';
 import 'package:flutter_professor_diego/pages/home_controller.dart';
 import 'package:flutter_professor_diego/pages/time_page.dart';
 import 'package:flutter_professor_diego/repositories/times_repository.dart';
@@ -15,6 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var controller;
+  var themeController = ThemeController.to;
 
   @override
   void initState() {
@@ -29,6 +31,24 @@ class _HomePageState extends State<HomePage> {
         title: const Center(
           child: Text('Brasileirão'),
         ),
+        actions: [
+          PopupMenuButton(
+            icon: const Icon(Icons.more_vert),
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                  child: ListTile(
+                    leading: Obx(() => themeController.isDark.value
+                      ? Icon(Icons.brightness_7)
+                      : Icon(Icons.brightness_2)),
+                    title: Obx(() => themeController.isDark.value
+                      ? Text('Light')
+                      : Text('Dark')),
+                    onTap: () => themeController.changeTheme(),
+                  )
+              ),
+            ],
+          )
+        ],
       ),
       body: Consumer<TimesRepository>(
         builder: (context, repositorio, child) {
